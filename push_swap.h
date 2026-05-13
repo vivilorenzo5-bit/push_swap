@@ -6,7 +6,7 @@
 /*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 18:21:49 by vlourenc          #+#    #+#             */
-/*   Updated: 2026/05/13 10:10:41 by vlourenc         ###   ########.fr       */
+/*   Updated: 2026/05/13 11:22:48 by vlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <limits.h> 
+# include <unistd.h>
 
 typedef struct s_node
 {

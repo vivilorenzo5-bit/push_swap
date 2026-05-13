@@ -1,29 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 11:14:17 by vlourenc          #+#    #+#             */
-/*   Updated: 2026/05/13 11:27:00 by vlourenc         ###   ########.fr       */
+/*   Created: 2026/05/13 12:29:44 by vlourenc          #+#    #+#             */
+/*   Updated: 2026/05/13 12:29:45 by vlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-int main(int argc, char **argv)
-{
-	t_stack_node *a;
-	t_stack_node *b;
-
-	a = NULL;
-	b = NULL;
-	if (argc < 2 || (argc == 2 && !argv[1][0]))
-		return (0);
-	if (argc == 2)
-		argv = ft_split(argv[1], ' ');
-	else
-		argv = argv + 1;
-	
-}

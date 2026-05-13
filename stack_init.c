@@ -6,7 +6,7 @@
 /*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 18:50:46 by vlourenc          #+#    #+#             */
-/*   Updated: 2026/05/13 10:55:54 by vlourenc         ###   ########.fr       */
+/*   Updated: 2026/05/13 12:26:56 by vlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,28 @@ void	append_node(t_stack_node **stack, int n)
 	{
 		last_node = find_last(*stack);
 		last_node->next = node;
-		node->prev = node;
+		node->prev = last_node;
 	}
 }
 
-t_stack_node	*find_last(t_stack_node *stack)
+void	stack_init_a(t_stack_node **a, char **argv, bool is_split)
 {
-	if (!stack)
-		return (NULL);
-	while (stack->next)
-		stack = stack->next;
-	return (stack);
+	long	n;
+	int		i;
+
+	i = 0;
+	while (argv[i])
+	{
+		n = ft_atol(argv[i]);
+		if (syntax_error(argv[i]))
+			free_errors(a, argv, is_split);
+		if (n > INT_MAX || n < INT_MIN)
+			free_errors(a, argv, is_split);
+		if (error_duplicate(*a, (int)n))
+			free_errors(a, argv, is_split);
+		append_node(a, (int)n);
+		i++;
+	}
+	if (is_split)
+		free_argv(argv);
 }
