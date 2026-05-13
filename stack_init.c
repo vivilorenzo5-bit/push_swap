@@ -6,7 +6,7 @@
 /*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 18:50:46 by vlourenc          #+#    #+#             */
-/*   Updated: 2026/05/13 12:26:56 by vlourenc         ###   ########.fr       */
+/*   Updated: 2026/05/13 13:13:49 by vlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,17 @@ void	stack_init_a(t_stack_node **a, char **argv, bool is_split)
 	}
 	if (is_split)
 		free_argv(argv);
+}
+
+int	error_duplicate(t_stack_node *a, int n)
+{
+	if (!a)
+		return (0);
+	while (a)
+	{
+		if (a->value == n)
+			return (1);
+		a = a->next;
+	}
+	return (0);
 }
