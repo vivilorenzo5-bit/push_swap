@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roda-fon <roda-fon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:52:48 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/14 13:48:37 by roda-fon         ###   ########.fr       */
+/*   Updated: 2026/05/14 16:33:51 by vlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_config
 
 typedef struct s_node
 {
-    int 			value;
-    int 			index;
+    int             value;
+    int             index;
     struct s_node   *prev;
     struct s_node   *next;
 }               t_node;
