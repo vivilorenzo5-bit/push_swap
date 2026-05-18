@@ -6,13 +6,13 @@
 /*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:16:22 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/14 16:57:41 by vlourenc         ###   ########.fr       */
+/*   Updated: 2026/05/18 09:53:33 by vlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	swap(t_node *stack)
+void	swap(t_node *stack)
 {
 	int	temp_value;
 	int	temp_index;
@@ -28,31 +28,37 @@ static void	swap(t_node *stack)
 	stack->next->index = temp_index;
 }
 
-void sa(t_node **a)
+void	sa(t_node **a)
 {
 	swap(*a);
 	write(1, "sa\n", 3);
 }
 
-void sb(t_node **b)
+void	sb(t_node **b)
 {
 	swap(*b);
 	write(1, "sb\n", 3);
 }
 
-static void push(t_node **dest, t_node **src)
+void	push(t_node **dest, t_node **src)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	if (!*src)
 		return ;
-	temp = *src;
-	*src = (*src)->next;
+	temp = *src; 				// Guarda o nó que vamos mover
+	*src = (*src)->next;  		// O novo topo da origem passa a ser o segundo
 	if (*src)
-		(*src)->prev = NULL;
-	temp->next = *dest;
+		(*src)->prev = NULL;	// Se sobrou alguém na origem, desliga o link para trás
+	temp->next = *dest;			// O nó movido agora aponta para o antigo topo do destino
 	if (*dest)
-		(*dest)->prev = temp;
-	*dest = temp;
-	(*dest)->prev = NULL;
+		(*dest)->prev = temp;	// O antigo topo do destino agora aponta para trás (para o novo nó)
+	*dest = temp;				// O destino agora começa oficialmente no novo nó
+	(*dest)->prev = NULL;		// Segurança: o topo nunca tem ninguém atrás
+}
+
+void	pa(t_node **a, t_node **b)
+{
+	push(a, b);
+	write(1, "pa\n", 3);
 }

@@ -6,7 +6,7 @@
 /*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 11:52:48 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/14 16:33:51 by vlourenc         ###   ########.fr       */
+/*   Updated: 2026/05/18 10:12:40 by vlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ void        print_error(void);
 
 int	        check_flag(char *av, t_config *config);
 t_node	    *last_node(t_node *stack);
-t_node	    *add_back(t_node **stack, int value);
+t_node	*add_back(t_node **stack, int value);
+
+void	swap(t_node *stack);
+void	push(t_node **dest, t_node **src);
+void	rotate(t_node **stack);
 
 #endif
