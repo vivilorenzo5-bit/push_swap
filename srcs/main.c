@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roda-fon <roda-fon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 14:11:52 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/14 12:51:29 by roda-fon         ###   ########.fr       */
+/*   Updated: 2026/05/19 12:27:07 by vlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,27 @@ static int	av_validate(int ac, char **av, t_node **a, t_config *config)
     return (1);
 }
 
-static void	valid_stack(t_config *config, t_node **a, t_node **b)
+static void execute_strategy(t_node **a, t_node **b, t_config *config)
 {
-    double  disorder;
+    double disorder;
 
-    if (config->a_size > 0)
+    sort_index(a);
+    disorder = calculate_disorder(*a);
+    if (config->mode == 0)
     {
-        disorder = calculate_disorder(*a);
-        
+        if (disorder < 0.2)
+            simple_algorithm(a, b, config);
+        else if (disorder >= 0.2 && disorder <= 0.5)
+            medium_algorithm(a, b, config);
+        else
+            complex_algorithm(a, b, config);
     }
+    else if (config->mode == 1)
+        simple_algorithm(a, b, config);
+    else if (config->mode == 2)
+        medium_algorithm(a, b, config);
+    else if (config->mode == 3)
+        complex_algorithm(a, b, config);
 }
 
 int main(int ac, char **av)
@@ -69,9 +81,12 @@ int main(int ac, char **av)
             return (free(config), free_stack(&stack_a), print_error(), 0);
     }
     else if (!av_validate(ac, av, &stack_a, config))
-        return (freesplit(config), free_stack(&stack_a), print_error(), 0);
-    ...;
-    if (config->total == 1)
-        ft_printfd(1, "%d\n", config->ops[0]);
+        return (free(config), free_stack(&stack_a), print_error(), 0);
+    execute_strategy(&stack_a, &stack_b, config);
+	if (config->total == 1)
+		ft_printfd(2, "Total operations: %d\n", config->ops[0]);
+    free_stack(&stack_a);
+    free_stack(&stack_b);
+    free(config);
     return (0);
 }
