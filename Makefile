@@ -6,7 +6,7 @@
 #    By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/12 11:08:52 by roda-fon          #+#    #+#              #
-#    Updated: 2026/05/19 12:37:53 by vlourenc         ###   ########.fr        #
+#    Updated: 2026/05/19 13:26:45 by vlourenc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,31 +15,57 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iincludes
 RM = rm -f
 
-SRCS = main.c operations1.c operations2.c operations3.c \
-       parsing.c tatic.c utils_algorithms.c \
-       utils_main.c utils_parsing.c print.c 
+SRCS_DIR = srcs
+ALGO_DIR = algorithms
+LIBFT_DIR = libft
+PRINTFD_DIR = printfd
+
+SRC_FILES = $(SRCS_DIR)/main.c \
+			$(SRCS_DIR)/operations1.c \
+			$(SRCS_DIR)/operations2.c \
+			$(SRCS_DIR)/operations3.c \
+			$(SRCS_DIR)/parsing.c \
+			$(SRCS_DIR)/print.c \
+			$(SRCS_DIR)/tatic.c \
+			$(SRCS_DIR)/utils_main.c \
+			$(SRCS_DIR)/utils_parsing.c \
+
+ALGO_FILES = $(ALGO_DIR)/simple_algorithm.c \
+			 $(ALGO_DIR)/medium_algorithm.c \
+			 $(ALGO_DIR)/complex_algorithm.c \
+
+LIBFT_FILES = $(LIBFT_DIR)/ft_split.c \
+			  $(LIBFT_DIR)/ft_strncmp.c \
+
+PRINTFD_FILES = $(PRINTFD_DIR)/ft_printfd_digits.c \
+				$(PRINTFD_DIR)/ft_printfd_utils.c \
+				$(PRINTFD_DIR)/ft_printfd.c \
+
+SRCS = $(SRC_FILES) $(ALGO_FILES) $(LIBFT_FILES) $(PRINTFD_FILES)
 
 OBJS = $(SRCS:.c=.o)
 
-all: $(LIBFT) $(NAME)
+GREEN       = \033[0;32m
+YELLOW      = \033[0;33m
+RESET       = \033[0m
+
+all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "$(NAME) compiling..."
-	@$(CC) $(CFLAGS) $(OBJS)
-	@echo "$(NAME) compiled successfully."
+	@echo "$(YELLOW)Compilando o executável $(NAME)...$(RESET)"
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@echo "$(GREEN)Push_swap compilado com sucesso! 🚀$(RESET)"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@make -C clean
 	@$(RM) $(OBJS)
-	@echo "Object files ($(NAME)) removed."
+	@echo "$(YELLOW)Object files ($(NAME)) removed.$(RESET)"
 
 fclean: clean
-	@make -C $(LIBFT_DIR) fclean
 	@$(RM) $(NAME)
-	@echo "$(NAME) removed."
+	@echo "$(YELLOW)Executavel $(NAME) removed.$(RESET)"
 
 re: fclean all
 
