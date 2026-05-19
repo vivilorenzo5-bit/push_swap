@@ -6,7 +6,7 @@
 /*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 14:11:52 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/19 12:27:07 by vlourenc         ###   ########.fr       */
+/*   Updated: 2026/05/19 13:02:02 by vlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,30 @@ static void execute_strategy(t_node **a, t_node **b, t_config *config)
         complex_algorithm(a, b, config);
 }
 
+static void	handle_outputs(t_config *config, double initial_disorder)
+{
+	if (config->bench == 1)
+		print_benchmark(config, initial_disorder);
+	else if (config->total == 1)
+		ft_printfd(2, "%d\n", config->ops[0]);
+}
+
 int main(int ac, char **av)
 {
     t_config	*config;
 	t_node		*stack_a;
 	t_node		*stack_b;
-    
+	double		init_disorder;
+
     if (ac < 2)
         return (0);
     stack_a = NULL;
     stack_b = NULL;
     config = config_op();
-    if (!config)
-        return (1);
-    config->start_idx = flags_parsing(ac, av, config);
-    if (config->start_idx == -1 || ac - config->start_idx < 1)
-        return (free(config), print_error(), 0);
+    if (!config || flags_parsing(ac, av, config) == -1)
+        return (free(config), print_error(), 1);
+	if (ac - config->start_idx < 1)
+		return (free(config), print_error(), 0);
     if (ac - config->start_idx == 1)
     {
         if (!divide_string(av[config->start_idx], &stack_a, config))
@@ -82,11 +90,8 @@ int main(int ac, char **av)
     }
     else if (!av_validate(ac, av, &stack_a, config))
         return (free(config), free_stack(&stack_a), print_error(), 0);
-    execute_strategy(&stack_a, &stack_b, config);
-	if (config->total == 1)
-		ft_printfd(2, "Total operations: %d\n", config->ops[0]);
-    free_stack(&stack_a);
-    free_stack(&stack_b);
-    free(config);
-    return (0);
+	init_disorder = calculate_disorder(stack_a);
+	execute_strategy(&stack_a, &stack_b, config);
+	handle_outputs(config, init_disorder);
+	return (free_stack(&stack_a), free_stack(&stack_b), free(config), 0);
 }
