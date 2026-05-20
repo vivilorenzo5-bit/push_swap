@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   tatic.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roda-fon <roda-fon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/14 11:57:43 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/19 12:14:51 by vlourenc         ###   ########.fr       */
+/*   Created: 2026/05/18 13:37:08 by roda-fon          #+#    #+#             */
+/*   Updated: 2026/05/19 14:07:38 by roda-fon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	sort_index(t_node **stack)
+{
+	t_node	*atual;
+	t_node	*i;
+	int		smaller;
+
+	if (!stack || !*stack)
+		return ;
+	i = *stack;
+	while (i)
+	{
+		smaller = 0;
+		atual = *stack;
+		while (atual)
+		{
+			if (i->value > atual->value
+				|| (i->value == atual->value && i > atual))
+				smaller++;
+			atual = atual->next;
+		}
+		i->index = smaller;
+		i = i->next;
+	}
+}
 
 static int	find_max_index(t_node *stack)
 {
@@ -26,7 +51,7 @@ static int	find_max_index(t_node *stack)
 	return (max);
 }
 
-void	tiny_sort(t_node **a)
+void	tiny_sort(t_node **a, t_config *config)
 {
 	int	maxindex;
 
@@ -34,34 +59,9 @@ void	tiny_sort(t_node **a)
 		return ;
 	maxindex = find_max_index(*a);
 	if ((*a)->index == maxindex)
-		ra(a);
+		ra(a, config);
 	else if ((*a)->next->index == maxindex)
-		rra(a);
+		rra(a, config);
 	if ((*a)->index > (*a)->next->index)
-		sa(*a);
-}
-
-void	sort_index(t_node **stack)
-{
-    t_node  *atual;
-    t_node  *i;
-    int     smaller;
-    
-    if (!stack || !*stack)
-        return (NULL);
-    i = *stack;
-    while (i)
-    {
-        smaller = 0;
-        atual = *stack;
-        while (atual)
-        {
-            if (i->value > atual->value
-            || i->value == atual->value && i > atual)
-                smaller++;
-            atual = atual->next;
-        }
-        i->index = smaller;
-        i = i->next;
-    }
+		sa(a, config);
 }

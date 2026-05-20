@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex_algorithm.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roda-fon <roda-fon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:13:39 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/19 11:56:34 by vlourenc         ###   ########.fr       */
+/*   Updated: 2026/05/19 14:11:32 by roda-fon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static int	get_max_bits(int max_index)
 	return (bits);
 }
 
-static void	sort_bit_layer(t_node **a, t_node **b, t_config *config, int i)
+static void	sort_bit_layer(t_node **a, t_node **b,
+		t_config *config, int i)
 {
 	int	j;
 	int	size;
@@ -32,10 +33,10 @@ static void	sort_bit_layer(t_node **a, t_node **b, t_config *config, int i)
 	while (j < size)
 	{
 		if ((((*a)->index >> i) & 1) == 1)
-			ra(a);
+			ra(a, config);
 		else
 		{
-			pb(b, a);
+			pb(a, b, config);
 			config->b_size++;
 		}
 		j++;
@@ -54,7 +55,7 @@ void	complex_algorithm(t_node **a, t_node **b, t_config *config)
 		sort_bit_layer(a, b, config, i);
 		while (config->b_size > 0)
 		{
-			pa(a, b);
+			pa(a, b, config);
 			config->b_size--;
 		}
 		i++;

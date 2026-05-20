@@ -1,18 +1,6 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/05/12 11:08:52 by roda-fon          #+#    #+#              #
-#    Updated: 2026/05/19 13:26:45 by vlourenc         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iincludes
+CFLAGS = -Wall -Wextra -Werror -Ilibrary
 RM = rm -f
 
 SRCS_DIR = srcs
@@ -40,6 +28,7 @@ LIBFT_FILES = $(LIBFT_DIR)/ft_split.c \
 PRINTFD_FILES = $(PRINTFD_DIR)/ft_printfd_digits.c \
 				$(PRINTFD_DIR)/ft_printfd_utils.c \
 				$(PRINTFD_DIR)/ft_printfd.c \
+				$(PRINTFD_DIR)/ft_print_ptr.c \
 
 SRCS = $(SRC_FILES) $(ALGO_FILES) $(LIBFT_FILES) $(PRINTFD_FILES)
 

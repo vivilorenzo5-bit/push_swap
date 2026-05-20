@@ -6,11 +6,11 @@
 /*   By: roda-fon <roda-fon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 16:13:43 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/11 16:14:36 by roda-fon         ###   ########.fr       */
+/*   Updated: 2026/05/19 13:48:53 by roda-fon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printfd.h"
+#include "../library/push_swap.h"
 
 int	ft_print_nbr(int fd, int nbr)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   medium_algorithm.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roda-fon <roda-fon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:12:39 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/19 11:03:30 by vlourenc         ###   ########.fr       */
+/*   Updated: 2026/05/20 12:12:13 by roda-fon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static int	sqrt(int number)
 	return (i - 1);
 }
 
-static void	handle_pb_rotate(t_node **a, t_node **b, int min, int max)
+static void	handle_pb_rotate(t_node **a, t_node **b, int mid, t_config *config)
 {
-	pb(b, a);
-	if ((*b)->index < (min + max) / 2)
-		rb(b);
+	pb(a, b, config);
+	if ((*b)->index < mid)
+		rb(b, config);
 }
 
 static void	push_chunks_to_b(t_node **a, t_node **b, t_config *config)
@@ -42,12 +42,12 @@ static void	push_chunks_to_b(t_node **a, t_node **b, t_config *config)
 	{
 		if ((*a)->index >= min_limit && (*a)->index < max_limit)
 		{
-			handle_pb_rotate(a, b, min_limit, max_limit);
+			handle_pb_rotate(a, b, (min_limit + max_limit) / 2, config);
 			config->a_size--;
 			config->b_size++;
 		}
 		else
-			ra(a);
+			ra(a, config);
 		if (config->b_size >= max_limit)
 		{
 			min_limit = max_limit;
@@ -73,16 +73,14 @@ static void	push_max_to_a(t_node **a, t_node **b, t_config *config)
 	if (pos <= config->b_size / 2)
 	{
 		while ((*b)->index != target)
-			rb(b);
+			rb(b, config);
 	}
 	else
 	{
 		while ((*b)->index != target)
-		{
-			rrb(b);
-		}
+			rrb(b, config);
 	}
-	pa(a, b);
+	pa(a, b, config);
 }
 
 void	medium_algorithm(t_node **a, t_node **b, t_config *config)

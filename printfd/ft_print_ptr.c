@@ -1,25 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_print_ptr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roda-fon <roda-fon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/11 15:46:13 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/19 13:47:05 by roda-fon         ###   ########.fr       */
+/*   Created: 2026/05/19 13:50:59 by roda-fon          #+#    #+#             */
+/*   Updated: 2026/05/20 10:42:36 by roda-fon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../library/push_swap.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+static int	ft_print_ptr_hex(int fd, unsigned long ptr)
 {
-	size_t	i;
+	char	*base;
+	int		len;
 
-	if (n == 0)
-		return (0);
-	i = 0;
-	while (i < (n - 1) && s1[i] == s2[i] && s1[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char) s2[i]);
+	base = "0123456789abcdef";
+	len = 0;
+	if (ptr >= 16)
+		len += ft_print_ptr_hex(fd, ptr / 16);
+	write(fd, &base[ptr % 16], 1);
+	len++;
+	return (len);
+}
+
+int	ft_print_ptr(int fd, unsigned long ptr)
+{
+	int	len;
+
+	len = 0;
+	if (ptr == 0)
+		return (write(fd, "(nil)", 5));
+	write(fd, "0x", 2);
+	len += 2;
+	len += ft_print_ptr_hex(fd, ptr);
+	return (len);
 }

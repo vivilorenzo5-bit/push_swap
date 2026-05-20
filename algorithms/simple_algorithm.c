@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   simple_algorithm.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roda-fon <roda-fon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/12 13:13:43 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/18 13:27:27 by vlourenc         ###   ########.fr       */
+/*   Created: 2026/05/14 11:57:43 by roda-fon          #+#    #+#             */
+/*   Updated: 2026/05/20 12:11:10 by roda-fon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// Encontra a posição (0, 1, 2...) do nó que tem o menor index na stack
 static int	get_min_position(t_node *stack)
 {
 	int	pos;
@@ -35,7 +34,6 @@ static int	get_min_position(t_node *stack)
 	return (min_pos);
 }
 
-// Roda a Stack A para trazer o menor elemento ao topo com o menor custo
 static void	push_min_to_b(t_node **a, t_node **b, t_config *config)
 {
 	int	pos;
@@ -43,36 +41,32 @@ static void	push_min_to_b(t_node **a, t_node **b, t_config *config)
 
 	pos = get_min_position(*a);
 	half = config->a_size / 2;
-	// Se estiver na primeira metade usamos ra
 	if (pos <= half)
 	{
 		while (pos--)
-			ra(a);
+			ra(a, config);
 	}
-	// Se estiver na segunda metade usamos rra
 	else
 	{
 		pos = config->a_size - pos;
 		while (pos--)
-			rra(a);
+			rra(a, config);
 	}
-	pb(b, a);
+	pb(a, b, config);
 	config->a_size--;
 	config->b_size++;
 }
 
 void	simple_algorithm(t_node **a, t_node **b, t_config *config)
 {
-	// Esvazia a Stack A mandando sempre os menores para a B
-	// até sobrarem apenas 3 elementos em A
+	if (calculate_disorder(*a) == 0.0)
+		return ;
 	while (config->a_size > 3)
 		push_min_to_b(a, b, config);
-	// Ordena  os 3 que sobraram
-	tiny_sort(a);
-	// Devolve tudo de B para A que já vai entrar ordenado no topo
+	tiny_sort(a, config);
 	while (config->b_size > 0)
 	{
-		pa(a, b);
+		pa(a, b, config);
 		config->a_size++;
 		config->b_size--;
 	}

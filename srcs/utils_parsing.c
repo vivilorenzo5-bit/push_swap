@@ -6,7 +6,7 @@
 /*   By: roda-fon <roda-fon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:00:23 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/12 15:15:53 by roda-fon         ###   ########.fr       */
+/*   Updated: 2026/05/18 13:36:17 by roda-fon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_flag(char *av, t_config *config)
 	return (1);
 }
 
-static	t_node	*create_new_node(int value)
+static t_node	*create_new_node(int value)
 {
 	t_node	*new_node;
 

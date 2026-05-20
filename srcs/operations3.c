@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roda-fon <roda-fon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/18 10:11:33 by vlourenc          #+#    #+#             */
-/*   Updated: 2026/05/18 11:25:13 by vlourenc         ###   ########.fr       */
+/*   Created: 2026/05/18 11:30:11 by roda-fon          #+#    #+#             */
+/*   Updated: 2026/05/20 10:48:05 by roda-fon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,39 @@ void	rev_rotate(t_node **stack)
 	if (!stack || !*stack || !(*stack)->next)
 		return ;
 	last = last_node(*stack);
-	last->prev->next = NULL; // O penúltimo agora diz que a seguir a ele é NULL
-	last->next = *stack; // antigo ultimo passa a apontar para o antigo topo
-	(*stack)->prev = last; // antigo topo aponta para tras
-	last->prev = NULL; // o topo nao tem ninguem atras
-	*stack = last; // atualiza o ponteiro real da stack
+	last->prev->next = NULL;
+	last->next = *stack;
+	(*stack)->prev = last;
+	last->prev = NULL;
+	*stack = last;
 }
 
-void	rra(t_node **a)
+void	rra(t_node **a, t_config *config)
 {
 	rev_rotate(a);
 	write(1, "rra\n", 4);
+	count_op(config, 9);
 }
 
-void	rrb(t_node **b)
+void	rrb(t_node **b, t_config *config)
 {
 	rev_rotate(b);
 	write(1, "rrb\n", 4);
+	count_op(config, 10);
 }
 
-void	rrr(t_node **a, t_node **b)
+void	rrr(t_node **a, t_node **b, t_config *config)
 {
 	rev_rotate(a);
 	rev_rotate(b);
 	write(1, "rrr\n", 4);
+	count_op(config, 11);
+}
+
+void	ss(t_node **a, t_node **b, t_config *config)
+{
+	swap(*a);
+	swap(*b);
+	write(1, "ss\n", 3);
+	count_op(config, 3);
 }

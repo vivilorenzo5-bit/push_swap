@@ -6,11 +6,11 @@
 /*   By: roda-fon <roda-fon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 15:44:19 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/12 11:58:56 by roda-fon         ###   ########.fr       */
+/*   Updated: 2026/05/19 13:47:01 by roda-fon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../library/push_swap.h"
 
 static	int	count_words(char const *s, char c)
 {
