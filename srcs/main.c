@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roda-fon <roda-fon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 14:11:52 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/20 12:16:56 by roda-fon         ###   ########.fr       */
+/*   Updated: 2026/05/20 15:54:53 by vlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	execute_strategy(t_node **a, t_node **b, t_config *config,
 	sort_index(a);
 	*disorder = calculate_disorder(*a);
 	if (*disorder < 0.01)
-        return ;
+		return ;
 	if (config->mode == 0)
 	{
 		if (*disorder < 0.2)

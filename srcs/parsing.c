@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roda-fon <roda-fon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vlourenc <vlourenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 14:59:19 by roda-fon          #+#    #+#             */
-/*   Updated: 2026/05/19 13:56:47 by roda-fon         ###   ########.fr       */
+/*   Updated: 2026/05/21 13:06:26 by vlourenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	flags_parsing(int ac, char **av, t_config *config)
 	i = 1;
 	while (i < ac)
 	{
-		if (av[1][0] == '-')
+		if (av[i][0] == '-')
 		{
 			if (av[i][1] == '\0' || (av[i][1] >= '0' && av[i][1] <= '9'))
 				break ;
